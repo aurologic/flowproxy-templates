@@ -1,0 +1,12 @@
+<!-- html snippet: button challenge -->
+<form action="/flowproxy/captcha/process" method="POST">
+    <script>
+        let referer = "__system_referer__"
+        if(referer == "__system_referer__" || referer.toLowerCase().includes("favicon")) referer = "";
+        function interact_response() {
+            document.cookie = "FLOWPROXY-CHALLENGE=" + "__system_set__";
+            document.location.href = referer;
+        }
+    </script>
+    <button type="button" onclick="interact_response()">Verify and continue</button>
+</form>

@@ -1,0 +1,25 @@
+<!-- html snippet: captcha challenge -->
+<form action="/flowproxy/captcha/process" method="POST">
+    <img id="challenge-image" src="/flowproxy/captcha/return/__system_set__.png" /><br />
+    <input type="hidden" name="referer" value="__system_referer__">
+    <input type="hidden" name="captchaId" value="__system_set__">
+    <input type="text" name="captchaSolution" class="form-control" />
+    <button type="button" onclick="reloadCaptcha()">New captcha</button>
+    <button type="submit">Verify and continue</button>
+</form>
+
+<script>
+    document.querySelectorAll(".hostname").forEach((i) => { i.innerText = window.location.host });
+    function setSrcQuery(e, q) {
+        var src  = e.src;
+        var p = src.indexOf('?');
+        if (p >= 0) {
+            src = src.substr(0, p);
+        }
+        e.src = src + "?" + q
+    }
+    function reload() {
+        setSrcQuery(document.getElementById('challenge-image'), "reload=" + (new Date()).getTime());
+        return false;
+    }
+</script>
